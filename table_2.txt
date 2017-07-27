@@ -1,0 +1,7 @@
+nohup: 忽略输入
+Traceback (most recent call last):
+  File "table_2.py", line 141, in <module>
+    train_x, train_labels = read_data_create_pairs(imageList, train_safty)
+  File "table_2.py", line 81, in read_data_create_pairs
+    x1 = dict[temp_val[i][0]]
+KeyError: '513d6b8afdc9f03587004d45'
