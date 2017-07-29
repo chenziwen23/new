@@ -8,7 +8,7 @@ import pdb
 import os
 from sklearn.metrics import accuracy_score
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 train_safty = r'/storage/guoyangyang/ziwen/Ranking_network/votes_safety/train_sa.csv'
 validate_safty = r'/storage/guoyangyang/ziwen/Ranking_network/votes_safety/validate_sa.csv'
@@ -124,12 +124,12 @@ with tf.variable_scope("siamese") as scope:
     scope.reuse_variables()
     model2 = ss_net(images_R)
 
-difference = tf.sigmoid(tf.subtract(model2, model1))
+difference = tf.sigmoid(tf.subtract(model1, model2))
 loss = log_loss_(labels, difference)
 optimizer = tf.train.AdamOptimizer(1e-3, beta1=0.9, beta2=0.999, epsilon=1e-08).minimize(loss)
 print('a------------------------------------******------------------------------------------a')
 # 启动会话-图
-gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=1)
+gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
 config=tf.ConfigProto(gpu_options=gpu_options)
 with tf.Session(config=config) as sess:
     # 初始化所有变量
