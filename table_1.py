@@ -107,7 +107,7 @@ def next_batch(s_, e_, inputs, labels_):
     y_ = np.reshape(labels_[s_:e_], (len(range(s_, e_)), 1))
     return input1_, input2_, y_
 
-batch_size = 512
+batch_size = 256
 # create training+validate+test pairs of image
 begin_time = time.time()
 imageList = readImageList(id_txt)
@@ -125,12 +125,12 @@ with tf.variable_scope("siamese") as scope:
     scope.reuse_variables()
     model2 = ss_net(images_R)
 
-difference = tf.sigmoid(tf.subtract(model2, model1))
+difference = tf.sigmoid(tf.subtract(model12, model1))
 loss = log_loss_(labels, difference)
 optimizer = tf.train.MomentumOptimizer(1e-3, 0.9).minimize(loss)
 print('a------------------------------------******------------------------------------------a')
 # 启动会话-图
-gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=1)
+gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
 config=tf.ConfigProto(gpu_options=gpu_options)
 with tf.Session(config=config) as sess:
     # 初始化所有变量

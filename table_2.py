@@ -93,23 +93,23 @@ def ss_net(x):
     return fc2
 
 
-# def fc_layer(bottom, n_weight, name):   # 注意bottom是256×4096的矩阵
-#     assert len(bottom.get_shape()) == 2     # 只有tensor有这个方法， 返回是一个tuple
-#     n_prev_weight = bottom.get_shape()[1]   # bottom.get_shape() 即 （256, 4096）
-#     initer = tf.truncated_normal_initializer(stddev=0.01)
-#     # 截断正太分布 均值mean（=0）,标准差stddev,只保留[mean-2*stddev,mean+2*stddev]内的随机数
-#     W = tf.get_variable(name + 'W', dtype=tf.float32, shape=[n_prev_weight, n_weight], initializer=initer)
-#     b = tf.get_variable(name + 'b', dtype=tf.float32,initializer=tf.constant(0.01,shape=[n_weight], dtype=tf.float32))
-#     fc = tf.nn.bias_add(tf.matmul(bottom, W), b)  # tf.nn.bias_add(value, bias, name = None) 将偏置项b加到values上
-#     return fc
-
-def fc_layer(bottom, n_weight, name):
-    assert len(bottom.get_shape()) == 2
-    n_prev_weight = bottom.get_shape()[1]
-    W = tf.get_variable(name + 'W', dtype=tf.float32, shape=[n_prev_weight, n_weight])
-    b = tf.get_variable(name + 'b', dtype=tf.float32, shape=[n_weight])
-    fc = tf.nn.bias_add(tf.matmul(bottom, W), b)
+def fc_layer(bottom, n_weight, name):   # 注意bottom是256×4096的矩阵
+    assert len(bottom.get_shape()) == 2     # 只有tensor有这个方法， 返回是一个tuple
+    n_prev_weight = bottom.get_shape()[1]   # bottom.get_shape() 即 （256, 4096）
+    initer = tf.truncated_normal_initializer(stddev=0.01)
+    # 截断正太分布 均值mean（=0）,标准差stddev,只保留[mean-2*stddev,mean+2*stddev]内的随机数
+    W = tf.get_variable(name + 'W', dtype=tf.float32, shape=[n_prev_weight, n_weight], initializer=initer)
+    b = tf.get_variable(name + 'b', dtype=tf.float32,initializer=tf.constant(0.01,shape=[n_weight], dtype=tf.float32))
+    fc = tf.nn.bias_add(tf.matmul(bottom, W), b)  # tf.nn.bias_add(value, bias, name = None) 将偏置项b加到values上
     return fc
+
+# def fc_layer(bottom, n_weight, name):
+#     assert len(bottom.get_shape()) == 2
+#     n_prev_weight = bottom.get_shape()[1]
+#     W = tf.get_variable(name + 'W', dtype=tf.float32, shape=[n_prev_weight, n_weight])
+#     b = tf.get_variable(name + 'b', dtype=tf.float32, shape=[n_weight])
+#     fc = tf.nn.bias_add(tf.matmul(bottom, W), b)
+#     return fc
 
 
 def log_loss_(label, difference_):
@@ -134,7 +134,7 @@ def next_batch(s_, e_, inputs, labels_):
     y_ = np.reshape(labels_[s_:e_], (len(range(s_, e_)), 1))
     return input1_, input2_, y_
 
-batch_size = 512
+batch_size = 256
 # create training+validate+test pairs of image
 begin_time = time.time()
 imageList = readImageList(id_txt)
@@ -152,12 +152,12 @@ with tf.variable_scope("siamese") as scope:
     scope.reuse_variables()
     model2 = ss_net(images_R)
 
-difference = tf.sigmoid(tf.subtract(model2, model1))
+difference = tf.sigmoid(tf.subtract(model1, model2))
 loss = log_loss_(labels, difference)
-optimizer = tf.train.MomentumOptimizer(1e-3, 0.9).minimize(loss)
+optimizer = tf.train.MomentumOptimizer(1e-4, 0.9).minimize(loss)
 print('a------------------------------------******------------------------------------------a')
 # 启动会话-图
-gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=1)
+gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
 config=tf.ConfigProto(gpu_options=gpu_options)
 with tf.Session(config=config) as sess:
     # 初始化所有变量

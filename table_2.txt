@@ -1,109 +1,108 @@
 nohup: 忽略输入
-2017-07-27 21:35:19.233815: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
-2017-07-27 21:35:19.252393: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
-2017-07-27 21:35:19.252430: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
-2017-07-27 21:35:19.252445: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
-2017-07-27 21:35:19.252458: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
-2017-07-27 21:35:20.401427: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
+2017-07-29 11:03:51.220919: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-07-29 11:03:51.233560: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-07-29 11:03:51.233622: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2017-07-29 11:03:51.233637: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-07-29 11:03:51.233650: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2017-07-29 11:03:53.798562: I tensorflow/core/common_runtime/gpu/gpu_device.cc:940] Found device 0 with properties: 
 name: GeForce GTX TITAN X
 major: 5 minor: 2 memoryClockRate (GHz) 1.076
 pciBusID 0000:03:00.0
 Total memory: 11.92GiB
 Free memory: 11.81GiB
-2017-07-27 21:35:20.401477: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
-2017-07-27 21:35:20.401487: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
-2017-07-27 21:35:20.401502: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:03:00.0)
-2017-07-27 21:35:20.419231: E tensorflow/stream_executor/cuda/cuda_driver.cc:924] failed to allocate 11.92G (12799574016 bytes) from device: CUDA_ERROR_OUT_OF_MEMORY
-3136.31568193
+2017-07-29 11:03:53.798622: I tensorflow/core/common_runtime/gpu/gpu_device.cc:961] DMA: 0 
+2017-07-29 11:03:53.798632: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971] 0:   Y 
+2017-07-29 11:03:53.798650: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1030] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:03:00.0)
+3403.92967391
 a------------------------------------******------------------------------------------a
-epoch 0  time: 23.513546 loss 0.77317 acc 58.70
-epoch 0 Accuracy validate set 59.49
-epoch 0 Accuracy test set 59.11
-epoch 1  time: 19.328369 loss 0.64979 acc 63.04
-epoch 1 Accuracy validate set 60.17
-epoch 1 Accuracy test set 59.92
-epoch 2  time: 17.164379 loss 0.63032 acc 64.73
-epoch 2 Accuracy validate set 60.33
-epoch 2 Accuracy test set 60.19
-epoch 3  time: 18.938510 loss 0.61588 acc 66.17
-epoch 3 Accuracy validate set 60.41
-epoch 3 Accuracy test set 60.37
-epoch 4  time: 18.950758 loss 0.60161 acc 67.54
-epoch 4 Accuracy validate set 60.69
-epoch 4 Accuracy test set 60.44
-epoch 5  time: 16.805929 loss 0.58697 acc 68.84
-epoch 5 Accuracy validate set 60.74
-epoch 5 Accuracy test set 60.35
-epoch 6  time: 18.980787 loss 0.57207 acc 70.09
-epoch 6 Accuracy validate set 60.63
-epoch 6 Accuracy test set 60.32
-epoch 7  time: 18.967829 loss 0.55720 acc 71.31
-epoch 7 Accuracy validate set 60.60
-epoch 7 Accuracy test set 60.20
-epoch 8  time: 16.924490 loss 0.54270 acc 72.37
-epoch 8 Accuracy validate set 60.47
-epoch 8 Accuracy test set 60.10
-epoch 9  time: 18.828117 loss 0.52872 acc 73.42
-epoch 9 Accuracy validate set 60.51
-epoch 9 Accuracy test set 60.02
-epoch 10  time: 16.951302 loss 0.51544 acc 74.36
-epoch 10 Accuracy validate set 60.25
-epoch 10 Accuracy test set 59.98
-epoch 11  time: 19.392174 loss 0.50295 acc 75.24
-epoch 11 Accuracy validate set 60.01
-epoch 11 Accuracy test set 59.88
-epoch 12  time: 17.094110 loss 0.49124 acc 76.06
-epoch 12 Accuracy validate set 59.84
-epoch 12 Accuracy test set 59.78
-epoch 13  time: 19.665050 loss 0.48024 acc 76.76
-epoch 13 Accuracy validate set 60.03
-epoch 13 Accuracy test set 59.74
-epoch 14  time: 16.425922 loss 0.46990 acc 77.40
-epoch 14 Accuracy validate set 60.04
-epoch 14 Accuracy test set 59.65
-epoch 15  time: 19.013158 loss 0.46018 acc 78.00
-epoch 15 Accuracy validate set 59.82
-epoch 15 Accuracy test set 59.53
-epoch 16  time: 16.506889 loss 0.45103 acc 78.57
-epoch 16 Accuracy validate set 60.03
-epoch 16 Accuracy test set 59.42
-epoch 17  time: 18.698801 loss 0.44233 acc 79.13
-epoch 17 Accuracy validate set 59.96
-epoch 17 Accuracy test set 59.33
-epoch 18  time: 18.922254 loss 0.43397 acc 79.63
-epoch 18 Accuracy validate set 59.99
-epoch 18 Accuracy test set 59.21
-epoch 19  time: 16.667877 loss 0.42594 acc 80.14
-epoch 19 Accuracy validate set 59.80
-epoch 19 Accuracy test set 59.16
-epoch 20  time: 18.727566 loss 0.41813 acc 80.61
-epoch 20 Accuracy validate set 59.75
-epoch 20 Accuracy test set 59.01
-epoch 21  time: 16.569026 loss 0.41055 acc 81.03
-epoch 21 Accuracy validate set 59.70
-epoch 21 Accuracy test set 58.97
-epoch 22  time: 18.737463 loss 0.40306 acc 81.49
-epoch 22 Accuracy validate set 59.78
-epoch 22 Accuracy test set 58.91
-epoch 23  time: 16.549731 loss 0.39569 acc 81.97
-epoch 23 Accuracy validate set 59.69
-epoch 23 Accuracy test set 58.81
-epoch 24  time: 18.566276 loss 0.38851 acc 82.42
-epoch 24 Accuracy validate set 59.61
-epoch 24 Accuracy test set 58.81
-epoch 25  time: 16.664933 loss 0.38130 acc 82.83
-epoch 25 Accuracy validate set 59.67
-epoch 25 Accuracy test set 58.78
-epoch 26  time: 18.803754 loss 0.37405 acc 83.25
-epoch 26 Accuracy validate set 59.49
-epoch 26 Accuracy test set 58.79
-epoch 27  time: 16.703167 loss 0.36688 acc 83.63
-epoch 27 Accuracy validate set 59.45
-epoch 27 Accuracy test set 58.75
-epoch 28  time: 18.844405 loss 0.35977 acc 84.07
-epoch 28 Accuracy validate set 59.40
-epoch 28 Accuracy test set 58.62
-epoch 29  time: 18.567264 loss 0.35243 acc 84.50
-epoch 29 Accuracy validate set 59.30
-epoch 29 Accuracy test set 58.64
-Accuracy validate set 59.30
+epoch 0  time: 20.045064 loss 0.67181 acc 59.79
+epoch 0 Accuracy validate set 61.10
+epoch 0 Accuracy test set 61.06
+epoch 1  time: 17.240745 loss 0.64970 acc 62.18
+epoch 1 Accuracy validate set 62.00
+epoch 1 Accuracy test set 61.74
+epoch 2  time: 18.133246 loss 0.64153 acc 63.11
+epoch 2 Accuracy validate set 62.36
+epoch 2 Accuracy test set 62.09
+epoch 3  time: 18.413116 loss 0.63604 acc 63.74
+epoch 3 Accuracy validate set 62.85
+epoch 3 Accuracy test set 62.29
+epoch 4  time: 17.598834 loss 0.63167 acc 64.24
+epoch 4 Accuracy validate set 63.08
+epoch 4 Accuracy test set 62.39
+epoch 5  time: 18.307651 loss 0.62787 acc 64.70
+epoch 5 Accuracy validate set 63.20
+epoch 5 Accuracy test set 62.43
+epoch 6  time: 18.933218 loss 0.62434 acc 65.12
+epoch 6 Accuracy validate set 63.21
+epoch 6 Accuracy test set 62.46
+epoch 7  time: 20.345135 loss 0.62095 acc 65.52
+epoch 7 Accuracy validate set 63.28
+epoch 7 Accuracy test set 62.48
+epoch 8  time: 20.258203 loss 0.61759 acc 65.91
+epoch 8 Accuracy validate set 63.30
+epoch 8 Accuracy test set 62.47
+epoch 9  time: 19.768193 loss 0.61420 acc 66.24
+epoch 9 Accuracy validate set 63.40
+epoch 9 Accuracy test set 62.45
+epoch 10  time: 19.131547 loss 0.61075 acc 66.60
+epoch 10 Accuracy validate set 63.40
+epoch 10 Accuracy test set 62.46
+epoch 11  time: 18.460193 loss 0.60719 acc 66.99
+epoch 11 Accuracy validate set 63.51
+epoch 11 Accuracy test set 62.48
+epoch 12  time: 17.832904 loss 0.60351 acc 67.36
+epoch 12 Accuracy validate set 63.42
+epoch 12 Accuracy test set 62.49
+epoch 13  time: 18.635697 loss 0.59970 acc 67.76
+epoch 13 Accuracy validate set 63.43
+epoch 13 Accuracy test set 62.51
+epoch 14  time: 18.306871 loss 0.59574 acc 68.19
+epoch 14 Accuracy validate set 63.51
+epoch 14 Accuracy test set 62.49
+epoch 15  time: 18.092536 loss 0.59163 acc 68.60
+epoch 15 Accuracy validate set 63.61
+epoch 15 Accuracy test set 62.52
+epoch 16  time: 18.477172 loss 0.58739 acc 68.98
+epoch 16 Accuracy validate set 63.66
+epoch 16 Accuracy test set 62.53
+epoch 17  time: 17.287947 loss 0.58299 acc 69.38
+epoch 17 Accuracy validate set 63.49
+epoch 17 Accuracy test set 62.48
+epoch 18  time: 17.511190 loss 0.57845 acc 69.83
+epoch 18 Accuracy validate set 63.53
+epoch 18 Accuracy test set 62.49
+epoch 19  time: 17.835989 loss 0.57378 acc 70.25
+epoch 19 Accuracy validate set 63.48
+epoch 19 Accuracy test set 62.47
+epoch 20  time: 17.556467 loss 0.56899 acc 70.69
+epoch 20 Accuracy validate set 63.51
+epoch 20 Accuracy test set 62.50
+epoch 21  time: 17.966011 loss 0.56408 acc 71.10
+epoch 21 Accuracy validate set 63.55
+epoch 21 Accuracy test set 62.47
+epoch 22  time: 18.026743 loss 0.55908 acc 71.54
+epoch 22 Accuracy validate set 63.46
+epoch 22 Accuracy test set 62.44
+epoch 23  time: 18.489838 loss 0.55399 acc 71.98
+epoch 23 Accuracy validate set 63.38
+epoch 23 Accuracy test set 62.40
+epoch 24  time: 18.545942 loss 0.54883 acc 72.37
+epoch 24 Accuracy validate set 63.24
+epoch 24 Accuracy test set 62.33
+epoch 25  time: 17.761510 loss 0.54361 acc 72.79
+epoch 25 Accuracy validate set 63.09
+epoch 25 Accuracy test set 62.29
+epoch 26  time: 17.864188 loss 0.53836 acc 73.23
+epoch 26 Accuracy validate set 63.01
+epoch 26 Accuracy test set 62.22
+epoch 27  time: 17.689913 loss 0.53308 acc 73.69
+epoch 27 Accuracy validate set 62.94
+epoch 27 Accuracy test set 62.16
+epoch 28  time: 18.091252 loss 0.52779 acc 74.09
+epoch 28 Accuracy validate set 62.82
+epoch 28 Accuracy test set 62.13
+epoch 29  time: 17.757865 loss 0.52251 acc 74.47
+epoch 29 Accuracy validate set 62.79
+epoch 29 Accuracy test set 62.12
+Accuracy validate set 62.79
