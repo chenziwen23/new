@@ -8,7 +8,7 @@ import pdb
 import os
 from sklearn.metrics import accuracy_score
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 train_safty = r'/storage/guoyangyang/ziwen/Ranking_network/votes_safety/train_sa.csv'
 validate_safty = r'/storage/guoyangyang/ziwen/Ranking_network/votes_safety/validate_sa.csv'
@@ -60,7 +60,10 @@ def read_data_create_pairs(imageList_, safty):
 
 def ss_net(x):
     fc1 = fc_layer(x, 4096, "fc1")
-    ac1 = tf.nn.relu(fc1)
+    mean1, variance1 = tf.nn.moments(fc1, [0])
+    bn_fc1 = tf.nn.batch_normalization(fc1, mean=mean1, variance=variance1, offset=0, scale=1, variance_epsilon=0.001)
+    ac1 = tf.nn.relu(bn_fc1)
+    # dc1 = tf.nn.dropout(ac1, 1-dropout_ratio_)
     fc2 = fc_layer(ac1, 1, "fc2")
     return fc2
 
@@ -74,14 +77,6 @@ def fc_layer(bottom, n_weight, name):   # 注意bottom是256×4096的矩阵
     b = tf.get_variable(name + 'b', dtype=tf.float32,initializer=tf.constant(0.01,shape=[n_weight], dtype=tf.float32))
     fc = tf.nn.bias_add(tf.matmul(bottom, W), b)  # tf.nn.bias_add(value, bias, name = None) 将偏置项b加到values上
     return fc
-
-# def fc_layer(bottom, n_weight, name):
-#     assert len(bottom.get_shape()) == 2
-#     n_prev_weight = bottom.get_shape()[1]
-#     W = tf.get_variable(name + 'W', dtype=tf.float32, shape=[n_prev_weight, n_weight])
-#     b = tf.get_variable(name + 'b', dtype=tf.float32, shape=[n_weight])
-#     fc = tf.nn.bias_add(tf.matmul(bottom, W), b)
-#     return fc
 
 
 def log_loss_(label, difference_):
@@ -106,7 +101,7 @@ def next_batch(s_, e_, inputs, labels_):
     y_ = np.reshape(labels_[s_:e_], (len(range(s_, e_)), 1))
     return input1_, input2_, y_
 
-batch_size = 512
+batch_size = 256
 # create training+validate+test pairs of image
 begin_time = time.time()
 imageList = readImageList(id_txt)
@@ -126,7 +121,7 @@ with tf.variable_scope("siamese") as scope:
 
 difference = tf.sigmoid(tf.subtract(model1, model2))
 loss = log_loss_(labels, difference)
-optimizer = tf.train.AdamOptimizer(1e-3, beta1=0.9, beta2=0.999, epsilon=1e-08).minimize(loss)
+optimizer = tf.train.MomentumOptimizer(1e-4, 0.9).minimize(loss)
 print('a------------------------------------******------------------------------------------a')
 # 启动会话-图
 gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.95)

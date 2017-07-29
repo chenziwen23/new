@@ -86,10 +86,16 @@ def read_data_create_pairs(imageList_, safty):
     return np.array(pairs), np.array(labels)  # 返回的两个值此时都是元组
 
 
+# def ss_net(x):
+#     fc1 = fc_layer(x, 4096, "fc1")
+#     ac1 = tf.nn.relu(fc1)
+#     fc2 = fc_layer(ac1, 1, "fc2")
+#     return fc2
 def ss_net(x):
     fc1 = fc_layer(x, 4096, "fc1")
     ac1 = tf.nn.relu(fc1)
-    fc2 = fc_layer(ac1, 1, "fc2")
+    dc1 = tf.nn.dropout(ac1, 0.8)
+    fc2 = fc_layer(dc1, 1, "fc2")
     return fc2
 
 

@@ -8,7 +8,7 @@ import pdb
 import os
 from sklearn.metrics import accuracy_score
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 train_safty = r'/storage/guoyangyang/ziwen/Ranking_network/votes_safety/train_sa.csv'
 validate_safty = r'/storage/guoyangyang/ziwen/Ranking_network/votes_safety/validate_sa.csv'
@@ -30,6 +30,33 @@ def readImageList(input_imagelist):
 
 
 # 序列号匹配对应的特征向量，并返回一个array数组(包含对应特征向量及标签)
+# def read_data_create_pairs(imageList_, safty):
+#     f = open(safty)
+#     reader = csv.reader(f)
+#     header = next(reader)
+#     data = np.genfromtxt(f_vector_csv, delimiter=',', dtype=float)
+#     temp_val,  temp = [], []
+#     dict = {}
+#     pairs = []
+#     labels = []
+#     for k in reader:
+#         temp_val.append(k)
+#     for j in range(len(imageList_)):
+#         dict[imageList_[j]] = j
+#     for i in range(len(temp_val)):
+#         if temp_val[i][2] == 'left':
+#             flag = 1
+#         elif temp_val[i][2] == 'right':
+#             flag = -1
+#         else:
+#             continue
+#         x1 = dict[temp_val[i][0]]
+#         x2 = dict[temp_val[i][1]]
+#         temp = [list(data[x1]), list(data[x2])]
+#         pairs.append(temp)
+#         labels.append(flag)
+#     return np.array(pairs), np.array(labels)  # 返回的两个值此时都是元组
+
 def read_data_create_pairs(imageList_, safty):
     f = open(safty)
     reader = csv.reader(f)
@@ -62,7 +89,9 @@ def read_data_create_pairs(imageList_, safty):
 def ss_net(x):
     fc1 = fc_layer(x, 4096, "fc1")
     ac1 = tf.nn.relu(fc1)
-    fc2 = fc_layer(ac1, 1, "fc2")
+    dc1 = tf.nn.dropout(ac1, 0.9)
+    fc2 = fc_layer(dc1, 1, "fc2")
+    # dc2 = tf.nn.dropout(fc2, 0.9)
     return fc2
 
 
@@ -125,9 +154,9 @@ with tf.variable_scope("siamese") as scope:
     scope.reuse_variables()
     model2 = ss_net(images_R)
 
-difference = tf.sigmoid(tf.subtract(model12, model1))
+difference = tf.sigmoid(tf.subtract(model1, model2))
 loss = log_loss_(labels, difference)
-optimizer = tf.train.MomentumOptimizer(1e-3, 0.9).minimize(loss)
+optimizer = tf.train.MomentumOptimizer(1e-4, 0.9).minimize(loss)
 print('a------------------------------------******------------------------------------------a')
 # 启动会话-图
 gpu_options=tf.GPUOptions(per_process_gpu_memory_fraction=0.95)
